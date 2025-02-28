@@ -1,19 +1,24 @@
-import { Button, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../context/AuthContext";
 
-const Home = () => {
+const HomeScreen = () => {
   const navigation = useNavigation().navigate;
+  const { user, logOut } = useAuth();
 
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
+      <Text>HomeScreen</Text>
+      <Text>{user ? user.username : "Usuario"}</Text>
+      <Text>{user ? user.role : "Rol"}</Text>
       <Button title="Scanner" onPress={() => navigation("Scanner")} />
+      <Button title="Cerrar Sesión" color="red" onPress={logOut} />
     </View>
   );
 };
 
-export default Home;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
